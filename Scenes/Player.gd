@@ -25,7 +25,6 @@ var FRICTION : float = 6.0
 var GRAVITY : float = 20.0
 var JUMP_FORCE : float = 8.5
 var AIR_CONTROL : float = 0.3
-var AUTO_JUMP : bool = true
 
 var GROUND_SETTINGS : MovementSettings = MovementSettings.new(10.0, 14.0, 10.0)
 var AIR_SETTINGS : MovementSettings = MovementSettings.new(7.0, 2.0, 2.0)
@@ -103,13 +102,7 @@ func process_movement(delta):
 
 # Player can queue the next jump before hitting the ground
 func queue_jump() -> void:
-	if AUTO_JUMP:
-		jump_queued = Input.is_action_pressed("jump")
-		return
-	if Input.is_action_pressed("jump") and !jump_queued:
-		jump_queued = true
-	if Input.is_action_pressed("jump"):
-		jump_queued = false
+	jump_queued = Input.is_action_pressed("jump")
 
 # Air movement
 func air_move(delta : float) -> void:
@@ -161,10 +154,8 @@ func air_control(target_dir : Vector3, target_speed : float, delta : float) -> v
 		vel.z *= speed + target_dir.z * k
 		vel = vel.normalized()
 		dir_norm = vel
-	vel.x *= speed
+	vel *= speed
 	vel.y = z_speed
-	vel.z *= speed
-	
 
 # Ground movement
 func ground_move(delta : float) -> void:
