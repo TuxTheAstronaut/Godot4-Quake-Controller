@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfnyogims63hg"]
+
+[ext_resource type="PackedScene" uid="uid://c7x7dug0qat2j" path="res://Level/Geometry/Wall.tscn" id="3_6cqqj"]
+[ext_resource type="PackedScene" uid="uid://d1075q4vwdsr0" path="res://Scenes/Player.tscn" id="3_eeed1"]
+[ext_resource type="PackedScene" uid="uid://cbhffky6mysil" path="res://Level/Geometry/Floor.tscn" id="3_ljgus"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qwcl2"]
+
+[sub_resource type="Sky" id="Sky_ayftm"]
+sky_material = SubResource("ProceduralSkyMaterial_qwcl2")
+
+[sub_resource type="Environment" id="Environment_wr5dt"]
+background_mode = 2
+sky = SubResource("Sky_ayftm")
+
+[node name="Level" type="Node3D"]
+
+[node name="Floor" parent="." instance=ExtResource("3_ljgus")]
+
+[node name="Wall" parent="Floor" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
+
+[node name="Wall2" parent="Floor" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+
+[node name="Wall3" parent="Floor" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20, 1, 0)
+
+[node name="Wall4" parent="Floor" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 1, 0)
+
+[node name="Wall5" parent="Floor" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(-0.25, 0, 0.866025, 0, 1, 0, -0.433013, 0, -0.5, -9, -1, 0)
+
+[node name="Wall7" parent="Floor" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(0.129409, 0.965926, 0, 2.5991e-08, 0, -1, -0.482963, 0.258819, -2.98023e-08, 18.4791, 2.28609, 2.27196)
+
+[node name="Wall6" parent="Floor/Wall7" instance=ExtResource("3_6cqqj")]
+transform = Transform3D(1, -8.9407e-08, -5.96046e-08, 2.98023e-08, 0.707107, 0.707107, 1.05367e-08, -0.707107, 0.707107, 0.0180979, -9.89155, 4.09082)
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 1.0677e-07, -1.0677e-07, 0, 0.707107, 0.707107, 1.50996e-07, 0.707107, -0.707107, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wr5dt")
+
+[node name="Player" parent="." instance=ExtResource("3_eeed1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67156, 1.72482, -3.32742)

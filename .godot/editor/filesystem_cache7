@@ -1,0 +1,17 @@
+0b7126e0c6e86d3ec295a72f5aa6e0bd
+::res://::1664164066
+default_env.tres::Environment::-1::1664137030::0::1::::<><>::
+icon.png::CompressedTexture2D::6607513826105947266::1662787064::1664164067::1::::<><>::
+main.gd::GDScript::-1::1663444841::0::1::::<>Node<>::
+MarginContainer.gd::GDScript::-1::1664137030::0::1::::<>MarginContainer<>::
+::res://Level/::1664163946
+Level.tscn::PackedScene::7538525717082372220::1664163946::0::1::::<><>::uid://c7x7dug0qat2j<>uid://d1075q4vwdsr0<>uid://cbhffky6mysil
+::res://Level/Geometry/::1663453420
+Floor.tscn::PackedScene::4857793932970315715::1663453420::0::1::::<><>::res://Level/Materials/M_Dark.tres
+Wall.tscn::PackedScene::7068314414189974027::1663442422::0::1::::<><>::res://Level/Materials/M_Dark.tres
+::res://Level/Materials/::1664138755
+M_Dark.tres::StandardMaterial3D::-1::1663429170::0::1::::<><>::res://Level/Materials/T_Grid.png
+T_Grid.png::CompressedTexture2D::887310813922127665::1662787064::1664138755::1::::<><>::
+::res://Scenes/::1664163946
+Player.gd::GDScript::-1::1664163552::0::1::::Player<>CharacterBody3D<>::
+Player.tscn::PackedScene::9037778833261926267::1664163946::0::1::::<><>::res://Scenes/Player.gd
