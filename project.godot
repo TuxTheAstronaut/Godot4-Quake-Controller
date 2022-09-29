@@ -29,10 +29,6 @@ config/icon="res://icon.png"
 
 Main="*res://main.gd"
 
-[display]
-
-window/vsync/vsync_mode=3
-
 [input]
 
 backward={

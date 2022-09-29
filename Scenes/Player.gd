@@ -67,6 +67,7 @@ func process_input():
 	if Input.is_action_pressed("crouch"):
 		if is_on_floor():
 			is_crouching = true
+			uncrouch_queued = false
 	if Input.is_action_just_pressed("crouch"):
 		if is_crouching:
 			var tween = get_tree().create_tween()
