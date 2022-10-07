@@ -17,6 +17,7 @@ target_position = Vector3(0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
 fov = 90.0
 far = 1000.0
 

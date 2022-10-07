@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgoalwwecfn4u"]
+
+[ext_resource type="Script" path="res://Scenes/PlayerController.gd" id="1_l0p0u"]
+[ext_resource type="Script" path="res://Scenes/PlayerNetworkController.gd" id="2_syoi4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nmn7a"]
+properties/0/path = NodePath(".:sync_position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:sync_vel")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="PlayerController" type="Node"]
+script = ExtResource("1_l0p0u")
+
+[node name="Network" type="Node" parent="."]
+script = ExtResource("2_syoi4")
+
+[node name="PhysicsSynchronizer" type="MultiplayerSynchronizer" parent="Network"]
+replication_config = SubResource("SceneReplicationConfig_nmn7a")
+visibility_update_mode = 1

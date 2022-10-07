@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfnyogims63hg"]
+[gd_scene load_steps=11 format=3 uid="uid://dfnyogims63hg"]
 
+[ext_resource type="Script" path="res://Level/Level.gd" id="1_b3f2x"]
 [ext_resource type="PackedScene" uid="uid://c7x7dug0qat2j" path="res://Level/Geometry/Wall.tscn" id="3_6cqqj"]
-[ext_resource type="PackedScene" uid="uid://d1075q4vwdsr0" path="res://Scenes/Player.tscn" id="3_eeed1"]
 [ext_resource type="PackedScene" uid="uid://cbhffky6mysil" path="res://Level/Geometry/Floor.tscn" id="3_ljgus"]
+[ext_resource type="Script" path="res://Level/UI.gd" id="4_2qns8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qwcl2"]
 
@@ -13,9 +14,23 @@ sky_material = SubResource("ProceduralSkyMaterial_qwcl2")
 background_mode = 2
 sky = SubResource("Sky_ayftm")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_362k7"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.211765, 0.211765, 0.211765, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fu1ha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1irpq"]
+
 [node name="Level" type="Node3D"]
+script = ExtResource("1_b3f2x")
 
 [node name="Floor" parent="." instance=ExtResource("3_ljgus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Wall" parent="Floor" instance=ExtResource("3_6cqqj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
@@ -46,5 +61,107 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wr5dt")
 
-[node name="Player" parent="." instance=ExtResource("3_eeed1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67156, 1.72482, -3.32742)
+[node name="Window" type="Window" parent="."]
+disable_3d = true
+position = Vector2i(100, 100)
+size = Vector2i(150, 200)
+unresizable = true
+min_size = Vector2i(150, 200)
+script = ExtResource("4_2qns8")
+
+[node name="Panel" type="Panel" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_362k7")
+
+[node name="Host" type="Button" parent="Window/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "Host"
+flat = true
+
+[node name="Join" type="Button" parent="Window/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Join
+"
+flat = true
+
+[node name="IP" type="LineEdit" parent="Window/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "Server IP"
+flat = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player_controller.tscn")
+spawn_path = NodePath("..")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 32.0
+grow_horizontal = 2
+
+[node name="Play" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 128.0
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fu1ha")
+text = "Play"
+flat = true
+
+[node name="Fullscreen" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_right = 216.0
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1irpq")
+text = "Fullscreen"
+flat = true
+alignment = 0
+
+[node name="Quit" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 264.0
+offset_right = 328.0
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1irpq")
+text = "Quit"
+flat = true
+alignment = 0
+
+[connection signal="close_requested" from="Window" to="Window" method="_on_window_close_requested"]
+[connection signal="pressed" from="Window/Panel/Host" to="Window" method="_on_host_pressed"]
+[connection signal="pressed" from="Window/Panel/Join" to="Window" method="_on_join_pressed"]
+[connection signal="text_submitted" from="Window/Panel/IP" to="Window" method="_on_ip_text_submitted"]
+[connection signal="pressed" from="Panel/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Panel/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="Panel/Quit" to="." method="_on_quit_pressed"]
