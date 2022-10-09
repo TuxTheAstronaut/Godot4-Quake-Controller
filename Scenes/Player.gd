@@ -5,6 +5,9 @@
 extends CharacterBody3D
 class_name Player
 
+# Signals
+signal crouch
+
 # For input
 const MOUSE_SENS : float = 3.0
 var rot : Vector2 = Vector2.ZERO
@@ -57,7 +60,6 @@ func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rot = Vector2(event.relative.y * MOUSE_SENS * -0.001, event.relative.x * MOUSE_SENS * -0.001)
 		process_rotations()
-	
 
 func process_input():
 	# Applying movement variables based checked input
@@ -68,6 +70,7 @@ func process_input():
 		if is_on_floor():
 			is_crouching = true
 			uncrouch_queued = false
+			emit_signal("crouch", true)
 	if Input.is_action_just_pressed("crouch"):
 		if is_crouching:
 			var tween = get_tree().create_tween()
@@ -132,6 +135,7 @@ func air_move(delta : float) -> void:
 		if !head_hit:
 			is_crouching = false
 			uncrouch_queued = false
+			emit_signal("crouch", false)
 			var tween = get_tree().create_tween()
 			tween.tween_property(head, "position:y", 0.5,0.1)
 			pcap.shape.height = standing_height
@@ -183,6 +187,7 @@ func ground_move(delta : float) -> void:
 		if !head_hit:
 			is_crouching = false
 			uncrouch_queued = false
+			emit_signal("crouch", false)
 			var tween = get_tree().create_tween()
 			tween.tween_property(head, "position:y", 0.5,0.1)
 			pcap.shape.height = standing_height
@@ -218,6 +223,7 @@ func crouch_move(delta : float) -> void:
 		if !head_hit:
 			is_crouching = false
 			uncrouch_queued = false
+			emit_signal("crouch", false)
 			var tween = get_tree().create_tween()
 			tween.tween_property(head, "position:y", 0.5,0.1)
 			pcap.shape.height = standing_height

@@ -6,6 +6,7 @@
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88496, 0)
+collision_layer = 2
 floor_constant_speed = true
 floor_snap_length = 0.3
 script = ExtResource("1")

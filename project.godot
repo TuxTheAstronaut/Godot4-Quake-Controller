@@ -32,6 +32,7 @@ Main="*res://main.gd"
 [display]
 
 window/dpi/allow_hidpi=false
+window/vsync/vsync_mode=2
 
 [input]
 

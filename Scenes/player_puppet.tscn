@@ -3,17 +3,19 @@
 [ext_resource type="Script" path="res://Scenes/player_puppet.gd" id="1_4sg16"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hqtiv"]
+resource_local_to_scene = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pkhqs"]
 
 [node name="player_puppet" type="CharacterBody3D"]
+collision_layer = 2
 floor_constant_speed = true
 floor_snap_length = 0.3
 script = ExtResource("1_4sg16")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_hqtiv")
-disabled = true
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="."]
+gi_mode = 2
 mesh = SubResource("CapsuleMesh_pkhqs")

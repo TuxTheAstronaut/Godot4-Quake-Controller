@@ -1,8 +1,9 @@
 res://Level/Level.tscn
 res://Scenes/Player.tscn
-res://Scenes/player_controller.tscn
 res://Scenes/player_puppet.tscn
 res://Scenes/PlayerController.gd
-res://Level/Level.gd
-res://Level/UI.gd
+res://Scenes/player_controller.tscn
+res://Scenes/player_puppet.gd
 res://main.gd
+res://Scenes/Player.gd
+res://Scenes/PlayerNetworkController.gd
