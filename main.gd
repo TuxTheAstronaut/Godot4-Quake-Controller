@@ -12,7 +12,7 @@ func _ready():
 	print("press ESCAPE to show mouse")
 	print("press F11 to fullscreen")
 	DisplayServer.window_set_min_size(Vector2i(1152,648))
-	Engine.set_target_fps(60)
+	Engine.max_fps = 60
 
 # pauses game when user hits escape
 func _input(event):
